@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Thing Like You and Me</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #050505;
+      color: #00ffcc;
+      font-family: 'JetBrains+Mono', monospace;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0.95;
+      }
+
+      5% {
+        opacity: 0.8;
+      }
+
+      10% {
+        opacity: 0.9;
+      }
+
+      15% {
+        opacity: 0.85;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.98;
+      }
+    }
+
+    .glitch-text {
+      text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+    }
+
+    .scanline {
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 255, 204, 0.1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: scan 8s linear infinite;
+    }
+
+    @keyframes scan {
+      from {
+        top: 0;
+      }
+
+      to {
+        top: 100%;
+      }
+    }
+
+    .trash-bin {
+      border: 1px dashed #444;
+      background: rgba(255, 0, 0, 0.05);
+    }
+
+    /* Feature Selection Animations */
+    @keyframes feature-flash {
+      0% {
+        filter: brightness(1);
+        box-shadow: none;
+      }
+
+      25% {
+        filter: brightness(2);
+        box-shadow: 0 0 30px rgba(0, 255, 204, 0.8);
+      }
+
+      50% {
+        filter: brightness(1.5);
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+      }
+
+      75% {
+        filter: brightness(2);
+        box-shadow: 0 0 30px rgba(0, 255, 204, 0.8);
+      }
+
+      100% {
+        filter: brightness(1);
+        box-shadow: none;
+      }
+    }
+
+    @keyframes calculate-pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes select-glow {
+      0% {
+        box-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+      }
+
+      100% {
+        box-shadow: 0 0 30px rgba(0, 255, 204, 1), 0 0 60px rgba(0, 255, 204, 0.5);
+      }
+    }
+
+    .phase-flash {
+      animation: feature-flash 0.5s ease-out;
+    }
+
+    .phase-calculate {
+      animation: calculate-pulse 0.3s ease-in-out infinite;
+    }
+
+    .phase-select {
+      animation: select-glow 0.5s ease-out forwards;
+      transform: scale(1.05);
+      z-index: 10 !important;
+    }
+
+    .phase-dim {
+      opacity: 0.3;
+      filter: grayscale(1);
+      transform: scale(0.95);
+      transition: all 0.5s ease-out;
+    }
+
+    .feature-winner {
+      border-color: #00ffcc !important;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+    }
+
+    /* Trash Pool Animations */
+    @keyframes trash-fly-in {
+      0% {
+        transform: translateX(-100px) scale(1.5);
+        opacity: 0;
+      }
+
+      50% {
+        transform: translateX(10px) scale(1.1);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .trash-item {
+      animation: trash-fly-in 0.4s ease-out forwards;
+      border: 1px solid #ff3366 !important;
+      position: relative;
+    }
+
+    .trash-item::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #ff3366;
+      transform: rotate(-15deg);
+    }
+
+    .rejected-label {
+      background: #ff3366;
+      color: black;
+      font-size: 6px;
+      font-weight: bold;
+      padding: 1px 3px;
+      text-transform: uppercase;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

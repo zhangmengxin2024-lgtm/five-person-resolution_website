@@ -1,0 +1,7 @@
+{
+  "name": "Like You and Me",
+  "description": "An interactive artistic system that objectifies human faces through small-sample algorithmic 'averaging', exposing the 'cruel' logic of AI-driven aesthetic standards.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

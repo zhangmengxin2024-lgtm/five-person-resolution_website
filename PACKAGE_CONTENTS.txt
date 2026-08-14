@@ -1,0 +1,13 @@
+Like You and Me collaborator handoff package
+
+Start here:
+1. Read COLLABORATOR_HANDOFF.md
+2. Run npm install
+3. Copy .env.example to .env.local
+4. Fill DASHSCOPE_API_KEY
+5. Run npm run dev
+
+Security:
+- This package does not include .env.local.
+- This package excludes the original test-api.js and includes test-api.example.js instead.
+- Send real API keys through a separate secure channel.
