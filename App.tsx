@@ -161,31 +161,55 @@ const App: React.FC = () => {
     }
   }, [phase, faces, currentSelections, generatedImageUrl, isGenerating]);
 
+  const isIntroduction = phase === SystemPhase.INTRODUCTION;
+  const isCapture = phase === SystemPhase.CAPTURE;
+  const isFramedStage =
+    isIntroduction ||
+    isCapture ||
+    phase === SystemPhase.ANALYSIS ||
+    phase === SystemPhase.ASSEMBLY;
+
   return (
-    <div className="h-screen relative overflow-hidden flex flex-col p-4 md:p-6 bg-black text-[#00ffcc]">
-      <div className="crt-overlay fixed inset-0 z-50 pointer-events-none opacity-20"></div>
-      <div className="scanline"></div>
+    <div
+      className={`h-screen relative overflow-hidden flex flex-col bg-black text-[#00ffcc] ${
+        isFramedStage ? 'p-0' : 'p-4 md:p-6'
+      }`}
+    >
+      {!isFramedStage && (
+        <>
+          <div className="crt-overlay fixed inset-0 z-50 pointer-events-none opacity-20"></div>
+          <div className="scanline"></div>
+          <Header />
+        </>
+      )}
 
-      <Header />
-
-      <main className="flex-1 mt-4 overflow-hidden flex flex-col">
-        {phase === SystemPhase.INTRODUCTION && (
-          <div className="flex-1 flex flex-col items-center justify-center space-y-8 animate-pulse text-center">
-            <div className="max-w-2xl space-y-6">
-              <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 glitch-text">
-                Optical_Inference_Required
-              </h1>
-              <p className="text-sm md:text-base opacity-70 leading-relaxed font-mono uppercase">
-                THE SYSTEM WILL AUTOMATICALLY IDENTIFY AND HARVEST FACIAL DATA.<br />
-                PLEASE ENTER THE OBSERVATION AREA TO INITIATE THE FIVE-PART IDENTITY RECOMBINATION.
-              </p>
-            </div>
-            <button
-              onClick={() => setPhase(SystemPhase.CAPTURE)}
-              className="border border-[#00ffcc] px-16 py-4 text-sm hover:bg-[#00ffcc] hover:text-black transition-all font-bold tracking-[0.3em] uppercase"
+      <main
+        className={`flex-1 overflow-hidden flex flex-col ${
+          isFramedStage ? 'mt-0' : 'mt-4'
+        }`}
+      >
+        {isIntroduction && (
+          <div className="flex-1 w-full h-full flex items-center justify-center bg-black">
+            <div
+              className="relative shrink-0"
+              style={{
+                width: 'min(100vw, calc(100vh * 1024 / 576))',
+                height: 'min(100vh, calc(100vw * 576 / 1024))',
+              }}
             >
-              ENTER OBSERVATION DECK
-            </button>
+              <img
+                src="/cover.jpg"
+                alt="Five-Person Resolution"
+                className="absolute inset-0 w-full h-full object-fill select-none pointer-events-none"
+                draggable={false}
+              />
+              <button
+                type="button"
+                onClick={() => setPhase(SystemPhase.CAPTURE)}
+                aria-label="Start Observation"
+                className="absolute left-1/2 top-[71.5%] z-10 h-[10%] w-[36%] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-0 bg-transparent outline-none shadow-none focus:outline-none focus-visible:outline-none"
+              />
+            </div>
           </div>
         )}
 
@@ -214,13 +238,15 @@ const App: React.FC = () => {
         )}
       </main>
 
-      <footer className="mt-4 flex justify-between items-end border-t border-[#00ffcc]/10 pt-2 text-[8px] opacity-40 font-mono">
-        <div>SYS.AUTONOMOUS.FACIAL.HARVEST_V5.0</div>
-        <div className="text-right">
-          STORAGE: {faces.length * 2.4}MB / 12.0MB<br />
-          STATUS: {phase}
-        </div>
-      </footer>
+      {!isFramedStage && (
+        <footer className="mt-4 flex justify-between items-end border-t border-[#00ffcc]/10 pt-2 text-[8px] opacity-40 font-mono">
+          <div>SYS.AUTONOMOUS.FACIAL.HARVEST_V5.0</div>
+          <div className="text-right">
+            STORAGE: {faces.length * 2.4}MB / 12.0MB<br />
+            STATUS: {phase}
+          </div>
+        </footer>
+      )}
     </div>
   );
 };

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Thing Like You and Me</title>
+  <title>Five-Person Resolution</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
@@ -197,6 +197,24 @@
       font-weight: bold;
       padding: 1px 3px;
       text-transform: uppercase;
+    }
+
+    /* Component Comparison: auto vertical playback */
+    @keyframes parts-auto-scroll {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+
+    .parts-auto-scroll {
+      animation-name: parts-auto-scroll;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform;
     }
   </style>
   <script type="importmap">

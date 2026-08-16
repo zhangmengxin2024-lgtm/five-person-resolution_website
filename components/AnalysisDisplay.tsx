@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { CapturedFace, SelectionState, AnimationPhase } from '../types';
 import TrashPool from './TrashPool';
+import FrameShell from './FrameShell';
 import { FEATURE_DEFINITIONS, FEATURE_DEFINITION_MAP } from '../utils/featureDefinitions';
 
 interface AnalysisDisplayProps {
@@ -90,7 +91,8 @@ const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
   };
 
   return (
-    <div className="flex-1 grid grid-cols-[minmax(0,1fr)_9rem] md:grid-cols-[minmax(0,1fr)_10rem] gap-4 overflow-hidden min-h-0">
+    <FrameShell status="ANALYSIS" storageMb={faces.length * 2.4}>
+      <div className="h-full min-h-0 grid grid-cols-[minmax(0,1fr)_9rem] md:grid-cols-[minmax(0,1fr)_10rem] gap-3 overflow-hidden p-2 md:p-3">
       <div className="min-h-0 flex flex-col gap-3">
         <section className="border border-[#00ffcc]/30 bg-black/50 p-3">
           <div className="flex items-start justify-between gap-4 mb-3">
@@ -260,7 +262,8 @@ const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({
       </div>
 
       <TrashPool items={rejectedItems} />
-    </div>
+      </div>
+    </FrameShell>
   );
 };
 
