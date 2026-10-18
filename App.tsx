@@ -198,7 +198,7 @@ const App: React.FC = () => {
               }}
             >
               <img
-                src="/cover.jpg"
+                src="/cover.jpg?v=2"
                 alt="Five-Person Resolution"
                 className="absolute inset-0 w-full h-full object-fill select-none pointer-events-none"
                 draggable={false}
@@ -207,7 +207,7 @@ const App: React.FC = () => {
                 type="button"
                 onClick={() => setPhase(SystemPhase.CAPTURE)}
                 aria-label="Start Observation"
-                className="absolute left-1/2 top-[71.5%] z-10 h-[10%] w-[36%] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-0 bg-transparent outline-none shadow-none focus:outline-none focus-visible:outline-none"
+                className="absolute left-1/2 top-[75%] z-10 h-[18%] w-[52%] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-0 bg-transparent outline-none shadow-none focus:outline-none focus-visible:outline-none"
               />
             </div>
           </div>
